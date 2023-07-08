@@ -72,12 +72,21 @@ public class Tube : MonoBehaviour
         {
             if(tubeHolder.ballCtrl !=null) ballOnTube++;
         }
-        if (ballOnTube == 0) ball = null;
+        if (ballOnTube == 0)
+        {
+            Debug.Log("stop here");
+            ball = null;
+            positions = tubeHolders[ballOnTube].position;
+        }
         else ball = tubeHolders[ballOnTube - 1].ballCtrl;
 
-        if (ballOnTube == 4) positions = Vector3.zero;
+        if (ballOnTube == 4)
+        {
+            positions = Vector3.zero;
+            ball = tubeHolders[ballOnTube - 1].ballCtrl;
+        }
         else positions = tubeHolders[ballOnTube].position;
-        Debug.Log("On Mouse down " + tubeHolders[ballOnTube - 1].ballCtrl.idBall.ToString());
+        //Debug.Log("On Mouse down " + tubeHolders[ballOnTube - 1].ballCtrl.idBall.ToString());
         TubeManager.Instance.GetTubeSelect(this, ball,positions);
         //LoadBallInTube();
     }

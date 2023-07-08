@@ -55,29 +55,29 @@ public class TubeManager : MonoBehaviour
 
     public void GetTubeSelect(Tube tube, BallCtrl ball , Vector3 position)
     {
-        if(ball != null)
+        if (tube1 == null)
         {
-            if (tube1 == null)
+            if (ball != null)
             {
                 tube1 = tube;
                 this.ballNeed = ball;
             }
-
-            else
+            else return;
+        }
+        else
+        {
+            if (tube2 == null && position != Vector3.zero)
             {
-                if (tube2 == null && position != Vector3.zero)
+                tube2 = tube;
+                if (tube2 != tube1)
                 {
-                    tube2 = tube;
-                    if (tube2 != tube1)
-                    {
-                        BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
-                        tube1.RefreshBallPotions();
-                        tube2.RefreshBallPotions();
-                        tube1 = tube2 = null;
-                    }    
+                    BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
+                    tube1.RefreshBallPotions();
+                    tube2.RefreshBallPotions();
+                    tube1 = tube2 = null;
                 }
-                else tube1 = tube2 = null;
             }
+            else tube1 = tube2 = null;
         }
     }
 }
