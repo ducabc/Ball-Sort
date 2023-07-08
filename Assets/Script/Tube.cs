@@ -7,8 +7,9 @@ using UnityEngine;
 [Serializable]
 public class Tube : MonoBehaviour
 {
-    public List<TubeHolder> tubeCtrls;
-    public int ballOnTube=0;
+    public List<TubeHolder> tubeHolder;
+    public List<BallCtrl> ballInTube;
+    private int ballOnTube;
 
     private void Start()
     {
@@ -25,31 +26,59 @@ public class Tube : MonoBehaviour
             posSpam.y += 0.5f;
             TubeHolder tube = new TubeHolder();
             tube.position = posSpam;
-            tubeCtrls.Add(tube);
+            tubeHolder.Add(tube);
         }
+    }
+
+    public void RefreshBallPotions()
+    {
+        LoadBallInTube();
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            if (tubeHolder[i].ballCtrl == null)
+                break;
+        }
+        Debug.Log("bong rong tai vi tri: " + i);
+        Debug.Log("tong so bong trong cot: " + ballInTube.Count);
+        if (i <= ballInTube.Count) tubeHolder[i].ballCtrl = ballInTube[i];
+        else tubeHolder[i-1].ballCtrl = null;
+
+    }
+
+    protected void LoadBallInTube()
+    {
+        if (ballInTube.Count != 0)
+            ballInTube.Clear();
+        ballInTube.AddRange(transform.GetComponentsInChildren<BallCtrl>());
     }
 
     protected void SpamBall()
     {
-        BallManager.Instance.SpamBall(transform, tubeCtrls);
+        BallManager.Instance.SpamBall(transform, tubeHolder);
     }
 
     protected void OnMouseDown()
     {
-        GetBallOnTop(tubeCtrls);
+        GetBallOnTop(tubeHolder);
     }
 
     protected void GetBallOnTop(List<TubeHolder> tubeHolders)
     {
+        BallCtrl ball = new BallCtrl();
+        Vector3 positions;
         ballOnTube = 0;
         foreach(TubeHolder tubeHolder in tubeHolders)
         {
             if(tubeHolder.ballCtrl !=null) ballOnTube++;
         }
-        if (ballOnTube > 0)
-        {
-            Debug.Log("On Mouse down" + tubeHolders[ballOnTube - 1].ballCtrl.idBall.ToString());
-            TubeManager.Instance.GetTubeSelect(transform, tubeHolders[ballOnTube - 1].ballCtrl, tubeHolders[ballOnTube].position);
-        }
+        if (ballOnTube == 0) ball = null;
+        else ball = tubeHolders[ballOnTube - 1].ballCtrl;
+
+        if (ballOnTube == 4) positions = Vector3.zero;
+        else positions = tubeHolders[ballOnTube].position;
+        Debug.Log("On Mouse down " + tubeHolders[ballOnTube - 1].ballCtrl.idBall.ToString());
+        TubeManager.Instance.GetTubeSelect(this, ball,positions);
+        //LoadBallInTube();
     }
 }

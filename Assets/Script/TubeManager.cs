@@ -9,8 +9,8 @@ public class TubeManager : MonoBehaviour
     public List<Vector3> positions;
     public Transform Prefab;
     private SpamCS SpamCS;
-    public Transform tube1;
-    public Transform tube2;
+    public Tube tube1;
+    public Tube tube2;
     public BallCtrl ballNeed;
     public static string TUBE = "Tube";
 
@@ -53,22 +53,31 @@ public class TubeManager : MonoBehaviour
     }
 
 
-    public void GetTubeSelect(Transform tube, BallCtrl ball , Vector3 position)
+    public void GetTubeSelect(Tube tube, BallCtrl ball , Vector3 position)
     {
-        if (tube1 == null)
+        if(ball != null)
         {
-            tube1 = tube;
-            this.ballNeed = ball;
-        }
-            
-        else
-        {
-            if (tube2 == null)
+            if (tube1 == null)
             {
-                tube2 = tube;
-                BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
-            } 
-            else tube1 = tube2 = null;
+                tube1 = tube;
+                this.ballNeed = ball;
+            }
+
+            else
+            {
+                if (tube2 == null && position != Vector3.zero)
+                {
+                    tube2 = tube;
+                    if (tube2 != tube1)
+                    {
+                        BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
+                        tube1.RefreshBallPotions();
+                        tube2.RefreshBallPotions();
+                        tube1 = tube2 = null;
+                    }    
+                }
+                else tube1 = tube2 = null;
+            }
         }
     }
 }

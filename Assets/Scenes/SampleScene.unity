@@ -188,6 +188,7 @@ Transform:
   - {fileID: 1358862328}
   - {fileID: 2092815981}
   - {fileID: 1277471181}
+  - {fileID: 539850383}
   m_Father: {fileID: 1634602308}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -373,6 +374,37 @@ Transform:
   m_Father: {fileID: 233869441}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &539850382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539850383}
+  m_Layer: 0
+  m_Name: WaitLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &539850383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539850382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 315517677}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667331918
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42c49cdfa534f24ca2d9792b77a383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tubeCtrls: []
-  ballOnTube: 0
+  tubeHolder: []
+  ballInTube: []
 --- !u!61 &667331921
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -879,3 +911,6 @@ MonoBehaviour:
   - {x: 2.6000001, y: -2.6, z: 0}
   - {x: 3.8000002, y: -2.6, z: 0}
   Prefab: {fileID: 1358862328}
+  tube1: {fileID: 0}
+  tube2: {fileID: 0}
+  ballNeed: {fileID: 0}

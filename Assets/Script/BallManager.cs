@@ -65,9 +65,15 @@ public class BallManager : MonoBehaviour
         tubeConLai--;
     }
 
-    public void TranBall(BallCtrl ball, Transform tube1,Transform tube2, Vector3 posSpam)
+    public void TranBall(BallCtrl ball, Tube tube1,Tube tube2, Vector3 posSpam)
     {
-        Debug.Log($"bóng c?n chuy?n: {ball.idBall}, V? trí c?n chuy?n: {posSpam}");
+        ChangeParent(ball, tube2);
+        ball.transform.position = posSpam;
+    }
+
+    protected void ChangeParent(BallCtrl ball, Tube parent)
+    {
+        ball.transform.SetParent(parent.transform);
     }
 
     protected void LoadBallObj()
