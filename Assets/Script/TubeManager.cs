@@ -67,6 +67,7 @@ public class TubeManager : MonoBehaviour
             tube1 = tube;
             this.ballNeed = tube1.GetBallOnTop();
             if (ballNeed == null) tube1 = null;
+            else ballNeed.SelectBall(true);
         }
         else
         {
@@ -87,10 +88,14 @@ public class TubeManager : MonoBehaviour
                         BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
                         tube1.RefreshBallPotions();
                         tube2.RefreshBallPotions();
-                        if (CheckWin()) Debug.Log("YOU WIN");
+                        if (CheckWin()) GameCtrl.Instance.NextLevel();
                         tube1 = tube2 = null;
+                        ballNeed.SelectBall(false);
                     }
-                    else tube2 = tube1 = null;
+                    else
+                    {
+                        tube2 = tube1 = null; ballNeed.SelectBall(false);
+                    }
                 }
             }
         }
@@ -104,7 +109,7 @@ public class TubeManager : MonoBehaviour
             if (tube.CheckWin()) tubePerfect++;
         }
         bool win = false;
-        if(tubePerfect == GameCtrl.Instance.tubeCount - BallManager.Instance.DoKho) win = true;
+        if(tubePerfect == GameCtrl.Instance.tubeCount - GameCtrl.Instance.doKho) win = true;
         return win;
     }
 }

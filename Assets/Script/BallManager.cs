@@ -6,7 +6,7 @@ using Assets.Script;
 public class BallManager : MonoBehaviour
 {
     public Transform tubeManager;
-    public int DoKho = 2;
+    private int DoKho = 2;
 
     private SpamCS SpamCS;
     private static string ball = "Ball";
@@ -31,6 +31,7 @@ public class BallManager : MonoBehaviour
 
     private void Start()
     {
+        DoKho = GameCtrl.Instance.doKho;
         tubeConLai = GameCtrl.Instance.tubeCount - 1;
         ballConLai = (GameCtrl.Instance.tubeCount - DoKho) * 4;
         GetRandomSprite();
@@ -55,7 +56,7 @@ public class BallManager : MonoBehaviour
         {
             Transform newBall = SpamCS.Instance.Spam(ball, holder, posSpam[i].position);
             BallCtrl ballCtrl = newBall.GetComponent<BallCtrl>();
-            
+            ballCtrl.SelectBall(false);
             ballCtrl.SetModel(SetSprite());
             ballCtrl.LoadIdBall();
             posSpam[i].ballCtrl = ballCtrl;
