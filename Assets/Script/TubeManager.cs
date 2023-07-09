@@ -7,12 +7,14 @@ using Assets.Script;
 public class TubeManager : MonoBehaviour
 {
     public List<Vector3> positions;
-    public Transform Prefab;
+    public List<Tube> listTube;
+
+    private Transform Prefab;
     private SpamCS SpamCS;
-    public Tube tube1;
-    public Tube tube2;
-    public BallCtrl ballNeed;
-    public static string TUBE = "Tube";
+    private Tube tube1;
+    private Tube tube2;
+    private BallCtrl ballNeed;
+    private static string TUBE = "Tube";
 
     private static TubeManager instance;
 
@@ -52,7 +54,10 @@ public class TubeManager : MonoBehaviour
         }
     }
 
-
+    protected void LoadTube()
+    {
+        listTube.AddRange(gameObject.GetComponentsInChildren<Tube>());
+    }
     public void GetTubeSelect(Tube tube, BallCtrl ball , Vector3 position)
     {
         if (tube1 == null)

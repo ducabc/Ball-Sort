@@ -9,6 +9,7 @@ public class Tube : MonoBehaviour
 {
     public List<TubeHolder> tubeHolder;
     public List<BallCtrl> ballInTube;
+    public bool prefect = false;
     private int ballOnTube;
 
     private void Start()
@@ -56,11 +57,13 @@ public class Tube : MonoBehaviour
     protected void SpamBall()
     {
         BallManager.Instance.SpamBall(transform, tubeHolder);
+        LoadBallInTube();
     }
 
     protected void OnMouseDown()
     {
         GetBallOnTop(tubeHolder);
+        CheckWin();
     }
 
     protected void GetBallOnTop(List<TubeHolder> tubeHolders)
@@ -86,8 +89,26 @@ public class Tube : MonoBehaviour
             ball = tubeHolders[ballOnTube - 1].ballCtrl;
         }
         else positions = tubeHolders[ballOnTube].position;
-        //Debug.Log("On Mouse down " + tubeHolders[ballOnTube - 1].ballCtrl.idBall.ToString());
         TubeManager.Instance.GetTubeSelect(this, ball,positions);
-        //LoadBallInTube();
+    }
+
+    protected void CheckWin()
+    {
+        int id;
+        if (ballOnTube == 0) prefect = true;
+        if(ballOnTube == 4)
+        {
+            id = ballInTube[0].idBall;
+            foreach (BallCtrl ballCtrl in ballInTube)
+            {
+                if (ballCtrl.idBall != id)
+                {
+                    prefect = false;
+                    return;
+                }
+                else prefect = true;
+            }
+        }
+        if(ballOnTube >0 && ballOnTube<4) prefect = false;
     }
 }
