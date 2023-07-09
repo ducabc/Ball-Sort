@@ -61,7 +61,6 @@ public class BallManager : MonoBehaviour
             posSpam[i].ballCtrl = ballCtrl;
             ballConLai--;
         }
-        Debug.Log(ballConLai);
         tubeConLai--;
     }
 

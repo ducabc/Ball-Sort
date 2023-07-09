@@ -40,8 +40,6 @@ public class Tube : MonoBehaviour
             if (tubeHolder[i].ballCtrl == null)
                 break;
         }
-        Debug.Log("bong rong tai vi tri: " + i);
-        Debug.Log("tong so bong trong cot: " + ballInTube.Count);
         if (i <= ballInTube.Count) tubeHolder[i].ballCtrl = ballInTube[i];
         else tubeHolder[i-1].ballCtrl = null;
 
@@ -52,6 +50,7 @@ public class Tube : MonoBehaviour
         if (ballInTube.Count != 0)
             ballInTube.Clear();
         ballInTube.AddRange(transform.GetComponentsInChildren<BallCtrl>());
+        ballOnTube = ballInTube.Count;
     }
 
     protected void SpamBall()
@@ -62,40 +61,48 @@ public class Tube : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        GetBallOnTop(tubeHolder);
-        CheckWin();
+        if (!prefect)
+        {
+            GetTubeHolderTop(tubeHolder);
+            TubeManager.Instance.GetTubeSelect(this);
+            CheckWin();
+        }
     }
 
-    protected void GetBallOnTop(List<TubeHolder> tubeHolders)
+    protected void GetTubeHolderTop(List<TubeHolder> tubeHolders)
     {
-        BallCtrl ball = new BallCtrl();
-        Vector3 positions;
         ballOnTube = 0;
         foreach(TubeHolder tubeHolder in tubeHolders)
         {
             if(tubeHolder.ballCtrl !=null) ballOnTube++;
         }
+    }
+
+    public BallCtrl GetBallOnTop()
+    {
+        BallCtrl ball = new BallCtrl();
         if (ballOnTube == 0)
         {
-            Debug.Log("stop here");
             ball = null;
-            positions = tubeHolders[ballOnTube].position;
         }
-        else ball = tubeHolders[ballOnTube - 1].ballCtrl;
+        else ball = tubeHolder[ballOnTube - 1].ballCtrl;
+        return ball;
+    }
 
+    public Vector3 GetPositionOnTop()
+    {
+        Vector3 positions;
         if (ballOnTube == 4)
         {
             positions = Vector3.zero;
-            ball = tubeHolders[ballOnTube - 1].ballCtrl;
         }
-        else positions = tubeHolders[ballOnTube].position;
-        TubeManager.Instance.GetTubeSelect(this, ball,positions);
+        else positions = tubeHolder[ballOnTube].position;
+        return positions;
     }
 
-    protected void CheckWin()
+    public bool CheckWin()
     {
         int id;
-        if (ballOnTube == 0) prefect = true;
         if(ballOnTube == 4)
         {
             id = ballInTube[0].idBall;
@@ -104,11 +111,11 @@ public class Tube : MonoBehaviour
                 if (ballCtrl.idBall != id)
                 {
                     prefect = false;
-                    return;
+                    break;
                 }
                 else prefect = true;
             }
         }
-        if(ballOnTube >0 && ballOnTube<4) prefect = false;
+        return prefect;
     }
 }

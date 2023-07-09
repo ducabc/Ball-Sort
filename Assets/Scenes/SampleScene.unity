@@ -453,6 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tubeHolder: []
   ballInTube: []
+  prefect: 0
 --- !u!61 &667331921
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -643,7 +644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1381115130
 Transform:
   m_ObjectHideFlags: 0
@@ -798,7 +799,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861708847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -846,15 +847,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4f449bd30a499f940b54f016b3461a34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 4.77}
+  m_Size: {x: 1.04, y: 1.04}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2092815980
@@ -910,7 +911,7 @@ MonoBehaviour:
   - {x: 1.4000001, y: -2.6, z: 0}
   - {x: 2.6000001, y: -2.6, z: 0}
   - {x: 3.8000002, y: -2.6, z: 0}
-  Prefab: {fileID: 1358862328}
+  listTube: []
+  tubePerfect: 0
   tube1: {fileID: 0}
   tube2: {fileID: 0}
-  ballNeed: {fileID: 0}

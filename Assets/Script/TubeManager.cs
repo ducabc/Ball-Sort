@@ -8,11 +8,12 @@ public class TubeManager : MonoBehaviour
 {
     public List<Vector3> positions;
     public List<Tube> listTube;
+    public int tubePerfect = 0;
 
     private Transform Prefab;
     private SpamCS SpamCS;
-    private Tube tube1;
-    private Tube tube2;
+    public Tube tube1;
+    public Tube tube2;
     private BallCtrl ballNeed;
     private static string TUBE = "Tube";
 
@@ -52,37 +53,58 @@ public class TubeManager : MonoBehaviour
         {
             SpamCS.Instance.Spam(TUBE, transform, positions[i]);
         }
+        LoadTube();
     }
 
     protected void LoadTube()
     {
         listTube.AddRange(gameObject.GetComponentsInChildren<Tube>());
     }
-    public void GetTubeSelect(Tube tube, BallCtrl ball , Vector3 position)
+    public void GetTubeSelect(Tube tube)
     {
         if (tube1 == null)
         {
-            if (ball != null)
-            {
-                tube1 = tube;
-                this.ballNeed = ball;
-            }
-            else return;
+            tube1 = tube;
+            this.ballNeed = tube1.GetBallOnTop();
+            if (ballNeed == null) tube1 = null;
         }
         else
         {
-            if (tube2 == null && position != Vector3.zero)
+            if (tube2 == null)
             {
                 tube2 = tube;
+                Vector3 position;
+                position = tube2.GetPositionOnTop();
+                if (position == Vector3.zero)
+                {
+                    tube2 = null;
+                    return;
+                }
                 if (tube2 != tube1)
                 {
-                    BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
-                    tube1.RefreshBallPotions();
-                    tube2.RefreshBallPotions();
-                    tube1 = tube2 = null;
+                    if (tube2.GetBallOnTop() == null || tube2.GetBallOnTop().idBall == ballNeed.idBall)
+                    {
+                        BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
+                        tube1.RefreshBallPotions();
+                        tube2.RefreshBallPotions();
+                        if (CheckWin()) Debug.Log("YOU WIN");
+                        tube1 = tube2 = null;
+                    }
+                    else tube2 = tube1 = null;
                 }
             }
-            else tube1 = tube2 = null;
         }
+    }
+
+    protected bool CheckWin()
+    {
+        tubePerfect = 0;
+        foreach (Tube tube in listTube)
+        {
+            if (tube.CheckWin()) tubePerfect++;
+        }
+        bool win = false;
+        if(tubePerfect == GameCtrl.Instance.tubeCount - BallManager.Instance.DoKho) win = true;
+        return win;
     }
 }
