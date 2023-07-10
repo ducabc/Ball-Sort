@@ -80,7 +80,7 @@ public class Tube : MonoBehaviour
 
     public BallCtrl GetBallOnTop()
     {
-        BallCtrl ball = new BallCtrl();
+        BallCtrl ball = new();
         if (ballOnTube == 0)
         {
             ball = null;
