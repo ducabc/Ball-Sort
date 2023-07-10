@@ -16,7 +16,9 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     {
         if (GameCtrl.instance != null) Debug.LogError("Only 1 GameCtrl allow to exist");
         GameCtrl.instance = this;
-        //DataPersitanceManager.Instance.LoadGame();
+    }
+    private void Start()
+    {
         LoadGame();
     }
     protected void Reset()

@@ -24,6 +24,9 @@ public class TubeManager : MonoBehaviour
     {
         if (TubeManager.instance != null) Debug.LogError("only 1 tube manager");
         TubeManager.instance = this;
+    }
+    private void Start()
+    {
         SpamTube();
     }
     protected void Reset()

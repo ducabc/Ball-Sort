@@ -26,11 +26,12 @@ public class BallManager : MonoBehaviour
     {
         if (instance != null) Debug.LogError("only 1 ball manager");
         BallManager.instance = this;
-        LoadBallObj();
+        
     }
 
     private void Start()
     {
+        LoadBallObj();
         DoKho = GameCtrl.Instance.doKho;
         tubeConLai = GameCtrl.Instance.tubeCount - 1;
         ballConLai = (GameCtrl.Instance.tubeCount - DoKho) * 4;
