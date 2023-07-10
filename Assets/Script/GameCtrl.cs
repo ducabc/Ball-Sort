@@ -31,7 +31,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
         if (level < 6)
         {
             doKho = 2;
-            tubeCount += level;
+            tubeCount += level-1;
         }
         else
         {
