@@ -13,6 +13,6 @@ public class UiAudio : MonoBehaviour
     }
     public void AudioVolume()
     {
-        AudioManager.Instance.MusicVolume(audioSlider.value);
+        AudioManager.Instance.AudioVolume(audioSlider.value);
     }
 }

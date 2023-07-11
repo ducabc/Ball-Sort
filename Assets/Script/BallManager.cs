@@ -11,6 +11,7 @@ public class BallManager : MonoBehaviour
     private SpamCS SpamCS;
     private static string ball = "Ball";
     private BallObj ballObj;
+    public List<BallObj> ballObjs;
     public List<Sprite> ballSprites;
     private List<int> spriteId = new List<int> {-1,-1};
 
@@ -19,14 +20,12 @@ public class BallManager : MonoBehaviour
     private int ballMin;
     private int ballMax;
     private int tubeConLai;
-
     private static BallManager instance;
     public static BallManager Instance => instance;
     private void Awake()
     {
         if (instance != null) Debug.LogError("only 1 ball manager");
         BallManager.instance = this;
-        
     }
 
     private void Start()
@@ -79,7 +78,7 @@ public class BallManager : MonoBehaviour
 
     protected void LoadBallObj()
     {
-        ballObj = Resources.Load<BallObj>("BallStyle1");
+        ballObj = Resources.Load<BallObj>($"BallStyle{Random.Range(1,6)}");
     }
     protected Sprite SetSprite()
     {

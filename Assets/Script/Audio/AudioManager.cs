@@ -19,6 +19,10 @@ public class AudioManager : MonoBehaviour
         }
         else Destroy(gameObject);
     }
+    private void Start()
+    {
+        PlayMusic("music_1");
+    }
     public void PlayMusic(string name)
     {
         Sound s = Array.Find(music, x => x.nameClip == name);
@@ -42,6 +46,10 @@ public class AudioManager : MonoBehaviour
     }
 
     public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+    public void AudioVolume(float volume)
     {
         audioSource.volume = volume;
     }
