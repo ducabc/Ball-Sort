@@ -7,6 +7,7 @@ public class ReloadUi : MonoBehaviour
 {
     public void ReloadGame()
     {
+        AudioManager.Instance.PlaySound("Reset");
         SceneManager.LoadScene("SampleScene");
     }
 }

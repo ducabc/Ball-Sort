@@ -8,6 +8,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     private static GameCtrl instance;
     public static GameCtrl Instance => instance;
     public TubeManager tubeManager;
+    public GameObject WinUi;
     public int level;
     public int tubeCount;
     public int doKho;
@@ -19,14 +20,20 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     }
     private void Start()
     {
+        WinUi.SetActive(false);
         LoadGame();
     }
     protected void Reset()
     {
         tubeManager = gameObject.GetComponentInChildren<TubeManager>();
+        WinUi = GameObject.Find("WinGame");
     }
     protected void LoadGame()
     {
+        if(level > 10)
+        {
+            Application.Quit();
+        }
         Debug.Log("dau void load" + level);
         if (level < 6)
         {
@@ -36,9 +43,14 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
         else
         {
             doKho = 1;
-            tubeCount = tubeCount + level - 5;
+            tubeCount = tubeCount + level - 6;
         }
     }
+    public void WinGameUi()
+    {
+        WinUi.SetActive(true);
+    }
+
     public void NextLevel()
     {
         level++;

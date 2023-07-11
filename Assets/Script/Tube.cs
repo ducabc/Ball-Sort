@@ -63,6 +63,7 @@ public class Tube : MonoBehaviour
     {
         if (!prefect)
         {
+            AudioManager.Instance.PlaySound("Click");
             GetTubeHolderTop(tubeHolder);
             TubeManager.Instance.GetTubeSelect(this);
             CheckWin();

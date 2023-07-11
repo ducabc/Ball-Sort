@@ -91,7 +91,11 @@ public class TubeManager : MonoBehaviour
                         BallManager.Instance.TranBall(this.ballNeed, this.tube1, this.tube2, position);
                         tube1.RefreshBallPotions();
                         tube2.RefreshBallPotions();
-                        if (CheckWin()) GameCtrl.Instance.NextLevel();
+                        if (CheckWin())
+                        {
+                            GameCtrl.Instance.WinGameUi();
+                            AudioManager.Instance.PlaySound("Win");
+                        }
                         tube1 = tube2 = null;
                         ballNeed.SelectBall(false);
                     }
