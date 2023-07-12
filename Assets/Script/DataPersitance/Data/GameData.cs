@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameData
 {
     public int level;
-
+    public int coin;
     public GameData()
     {
         this.level = 1;

@@ -119,4 +119,15 @@ public class TubeManager : MonoBehaviour
         if(tubePerfect == GameCtrl.Instance.tubeCount - GameCtrl.Instance.doKho) win = true;
         return win;
     }
+
+    public void CreateTubeHelp()
+    {
+        int n = GameCtrl.Instance.tubeCount;
+        if (n < 8)
+        {
+            SpamCS.Instance.Spam(TUBE, transform, positions[n]);
+            LoadTube();
+        }
+        else Debug.Log("Can help you with max of difficle level");
+    }
 }

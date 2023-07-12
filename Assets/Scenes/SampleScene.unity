@@ -469,7 +469,6 @@ MonoBehaviour:
   level: 0
   tubeCount: 4
   doKho: 2
-  ballRan: 0
 --- !u!1 &377072703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1957,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2576,6 +2575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tubeManager: {fileID: 2092815981}
+  ballObjs: []
   ballSprites: []
 --- !u!1 &1278232295
 GameObject:
@@ -3435,7 +3435,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

@@ -48,6 +48,18 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     }
     public void WinGameUi()
     {
+        Time.timeScale = 0;
+        float n = Time.time;
+        if (n <= 15) Debug.Log("3 sao");
+        else
+        {
+            if (n <= 30) Debug.Log("2 sao");
+            else
+            {
+                if (n <= 45) Debug.Log("1 sao");
+                else Debug.Log("0 sao");
+            }
+        }
         WinUi.SetActive(true);
     }
 
