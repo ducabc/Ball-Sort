@@ -121,11 +121,12 @@ public class TubeManager : MonoBehaviour
     }
 
     public void CreateTubeHelp()
-    {
+    {//TODO ham nay chi duoc chay 1 lan.
         int n = GameCtrl.Instance.tubeCount;
         if (n < 8)
         {
             SpamCS.Instance.Spam(TUBE, transform, positions[n]);
+            listTube.Clear();
             LoadTube();
         }
         else Debug.Log("Can help you with max of difficle level");

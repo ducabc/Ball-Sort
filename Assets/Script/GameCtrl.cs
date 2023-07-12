@@ -12,6 +12,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     public int level;
     public int tubeCount;
     public int doKho;
+    private int coin;
 
     private void Awake()
     {
@@ -50,17 +51,38 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     {
         Time.timeScale = 0;
         float n = Time.time;
-        if (n <= 15) Debug.Log("3 sao");
+        if (n <= 15)
+        {
+            Debug.Log("3 sao");
+            Star(10);
+        }
         else
         {
-            if (n <= 30) Debug.Log("2 sao");
+            if (n <= 30)
+            {
+                Debug.Log("2 sao");
+                Star(6);
+            }
             else
             {
-                if (n <= 45) Debug.Log("1 sao");
-                else Debug.Log("0 sao");
+                if (n <= 45)
+                {
+                    Debug.Log("1 sao");
+                    Star(4);
+                }
+                else 
+                {
+                    Debug.Log("0 sao");
+                    Star(1);
+                }
             }
         }
         WinUi.SetActive(true);
+    }
+    private void Star(int n)
+    {
+        coin = coin + n;
+        Debug.Log("Tong so coin dang co laf: " + coin);
     }
 
     public void NextLevel()
@@ -73,10 +95,12 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     public void LoadData(GameData data)
     {
         this.level = data.level;
+        this.coin = data.coin;
     }
 
     public void SaveData(ref GameData data)
     {
         data.level = this.level;
+        data.coin = this.coin;
     }
 }

@@ -10,5 +10,6 @@ public class GameData
     public GameData()
     {
         this.level = 1;
+        this.coin = 0;
     }
 }
