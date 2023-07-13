@@ -13,7 +13,6 @@ public class BallManager : MonoBehaviour
     private SpamCS SpamCS;
     private static string ball = "Ball";
     private BallObj ballObj;
-    public List<BallObj> ballObjs;
     public List<Sprite> ballSprites;
     private List<int> spriteId = new List<int> {-1,-1};
 
@@ -79,13 +78,14 @@ public class BallManager : MonoBehaviour
     }
 
     protected void LoadBallObj()
-    {///////////////////////////////////////////////////////////////////////////////
-        
-        for(int i = 1; i < 6; i++)
+    {
+        listSprite.Clear();
+        listSprite.Add(Resources.Load<BallObj>($"BallDefault"));
+        foreach(int n in GameCtrl.Instance.listBallObj)
         {
-            listSprite.Add(Resources.Load<BallObj>($"BallStyle{i}"));
+            listSprite.Add(Resources.Load<BallObj>($"BallStyle{n}"));
         }
-        ballObj = listSprite[Random.Range(0, listSprite.Count )];
+        ballObj = listSprite[Random.Range(0, listSprite.Count)];
     }
     protected Sprite SetSprite()
     {

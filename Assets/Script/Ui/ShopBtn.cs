@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopBtn : MonoBehaviour ,IDataPersitance
+public class ShopBtn : MonoBehaviour
 {
     public Transform shopUI;
-    public List<int> idBallObj;
     private void Reset()
     {
         shopUI = transform.Find("ShopUI");
@@ -15,21 +14,13 @@ public class ShopBtn : MonoBehaviour ,IDataPersitance
     public void OpenShop()
     {
         shopUI.gameObject.SetActive(true);
-    }
-    public void BuyBall()
-    {
-        idBallObj.Add(int.Parse(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name));
-        DataPersitanceManager.Instance.SaveGame();
+        Time.timeScale = 0;
     }
 
-    public void LoadData(GameData data)
+    public void QuitShop()
     {
-        this.idBallObj = data.idBallObj;
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        data.idBallObj = this.idBallObj;
+        shopUI?.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
 }

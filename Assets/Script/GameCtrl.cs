@@ -9,6 +9,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     public static GameCtrl Instance => instance;
     public TubeManager tubeManager;
     public GameObject WinUi;
+    public List<int> listBallObj;
     public int level;
     public int tubeCount;
     public int doKho;
@@ -53,15 +54,40 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
         WinUi.SetActive(true);
     }
 
+    public void AddIdBall(int n)
+    {
+        if (listBallObj.Count == 0)
+        {
+            listBallObj.Add(n);
+            DataPersitanceManager.Instance.SaveGame();
+        }
+        else
+        {
+            if (listBallObj.Contains(n)) return;
+            else
+            {
+                listBallObj.Add(n);
+                DataPersitanceManager.Instance.SaveGame();
+            }
+        }
+    }
+
+    public void totalCoin(int n)
+    {
+        coin += n;
+    }
+
     public void LoadData(GameData data)
     {
         this.level = data.level;
         this.coin = data.coin;
+        this.listBallObj = data.idBallObj;
     }
 
     public void SaveData(ref GameData data)
     {
         data.level = this.level;
         data.coin = this.coin;
+        data.idBallObj = this.listBallObj;
     }
 }
