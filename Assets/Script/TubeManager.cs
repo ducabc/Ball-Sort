@@ -15,6 +15,7 @@ public class TubeManager : MonoBehaviour
     public Tube tube1;
     public Tube tube2;
     private BallCtrl ballNeed;
+    private bool ballHelp = true;
     private static string TUBE = "Tube";
 
     private static TubeManager instance;
@@ -104,6 +105,7 @@ public class TubeManager : MonoBehaviour
                         tube2 = tube1 = null; ballNeed.SelectBall(false);
                     }
                 }
+                else tube2 = tube1 = null; ballNeed.SelectBall(false);
             }
         }
     }
@@ -121,14 +123,18 @@ public class TubeManager : MonoBehaviour
     }
 
     public void CreateTubeHelp()
-    {//TODO ham nay chi duoc chay 1 lan.
-        int n = GameCtrl.Instance.tubeCount;
-        if (n < 8)
+    {
+        if (ballHelp)
         {
-            SpamCS.Instance.Spam(TUBE, transform, positions[n]);
-            listTube.Clear();
-            LoadTube();
+            int n = GameCtrl.Instance.tubeCount;
+            if (n < 8)
+            {
+                ballHelp = false;
+                SpamCS.Instance.Spam(TUBE, transform, positions[n]);
+                listTube.Clear();
+                LoadTube();
+            }
+            else Debug.Log("Can help you with max of difficle level");
         }
-        else Debug.Log("Can help you with max of difficle level");
     }
 }

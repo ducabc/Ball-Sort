@@ -5,6 +5,8 @@ using Assets.Script;
 
 public class BallManager : MonoBehaviour
 {
+
+    public List<BallObj> listSprite = new();
     public Transform tubeManager;
     private int DoKho = 2;
 
@@ -77,8 +79,13 @@ public class BallManager : MonoBehaviour
     }
 
     protected void LoadBallObj()
-    {
-        ballObj = Resources.Load<BallObj>($"BallStyle{Random.Range(1,6)}");
+    {///////////////////////////////////////////////////////////////////////////////
+        
+        for(int i = 1; i < 6; i++)
+        {
+            listSprite.Add(Resources.Load<BallObj>($"BallStyle{i}"));
+        }
+        ballObj = listSprite[Random.Range(0, listSprite.Count )];
     }
     protected Sprite SetSprite()
     {
