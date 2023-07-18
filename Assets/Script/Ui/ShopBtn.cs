@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShopBtn : MonoBehaviour
 {
     public Transform shopUI;
+    private bool openShop = false;
     private void Reset()
     {
         shopUI = transform.Find("ShopUI");
@@ -13,14 +14,18 @@ public class ShopBtn : MonoBehaviour
     }
     public void OpenShop()
     {
-        shopUI.gameObject.SetActive(true);
-        Time.timeScale = 0;
-    }
-
-    public void QuitShop()
-    {
-        shopUI?.gameObject.SetActive(false);
-        Time.timeScale = 1;
+        if (!openShop)
+        {
+            shopUI.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            openShop = true;
+        }
+        else
+        {
+            shopUI.gameObject.SetActive(false);
+            Time.timeScale = 0;
+            openShop = false;
+        }
     }
 
 }

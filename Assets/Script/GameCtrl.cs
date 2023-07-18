@@ -10,10 +10,12 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     public TubeManager tubeManager;
     public GameObject WinUi;
     public List<int> listBallObj;
+    public LevelUI levelUI;
     public int level;
     public int tubeCount;
     public int doKho;
     public int coin;
+    public float timeCount = 0;
     
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     {
         tubeManager = gameObject.GetComponentInChildren<TubeManager>();
         WinUi = GameObject.FindObjectOfType<WinUI>().gameObject;
+        levelUI = GameObject.FindObjectOfType<LevelUI>();
         tubeCount = 4; doKho = 2;
     }
     protected void LoadGame()
@@ -37,7 +40,6 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
         {
             Application.Quit();
         }
-        Debug.Log("dau void load" + level);
         if (level < 6)
         {
             doKho = 2;
@@ -51,6 +53,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     }
     public void WinGameUi()
     {
+        timeCount = Time.time;
         WinUi.SetActive(true);
     }
 
@@ -59,7 +62,6 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
         if (listBallObj.Count == 0)
         {
             listBallObj.Add(n);
-            DataPersitanceManager.Instance.SaveGame();
         }
         else
         {
@@ -67,7 +69,6 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
             else
             {
                 listBallObj.Add(n);
-                DataPersitanceManager.Instance.SaveGame();
             }
         }
     }
@@ -75,6 +76,7 @@ public class GameCtrl : MonoBehaviour, IDataPersitance
     public void totalCoin(int n)
     {
         coin += n;
+        levelUI.updateCoin();
     }
 
     public void LoadData(GameData data)

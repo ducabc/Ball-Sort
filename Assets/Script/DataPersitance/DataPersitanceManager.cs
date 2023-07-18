@@ -46,7 +46,6 @@ public class DataPersitanceManager : MonoBehaviour
             Debug.Log("No data game was found");
             NewGame();
         }
-        else Debug.Log("chay qua day roi");
 
         foreach(IDataPersitance dataPersitanceObj in dataPersitanceObject)
         {

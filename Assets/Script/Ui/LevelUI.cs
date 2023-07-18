@@ -20,4 +20,9 @@ public class LevelUI : MonoBehaviour
         textLevel.text ="LEVEL: " +  GameCtrl.Instance.level.ToString();
         coinText.text ="x " +  GameCtrl.Instance.coin.ToString();
     }
+
+    public void updateCoin()
+    {
+        coinText.text = "x " + GameCtrl.Instance.coin.ToString();
+    }
 }

@@ -41,7 +41,7 @@ public class WinUI : MonoBehaviour, IDataPersitance
 
     protected void TotalStar()
     {
-        float n = Time.time;
+        float n = GameCtrl.Instance.timeCount;
         
         if (n <= 15)
         {
