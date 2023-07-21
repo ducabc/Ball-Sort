@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class BackGround : MonoBehaviour
 {
     public BallObj ballObj;
-    public SpriteRenderer sprite;
+    public Image sprite;
     private void Reset()
     {
         ballObj = Resources.Load<BallObj>($"BackGround");
-        sprite = this.GetComponent<SpriteRenderer>();
+        sprite = this.GetComponent<Image>();
     }
 
     public void Start()

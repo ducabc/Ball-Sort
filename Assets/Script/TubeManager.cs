@@ -37,13 +37,13 @@ public class TubeManager : MonoBehaviour
     }
     protected void SpamPosition()
     {
-        Vector3 posSpam = new Vector3(this.transform.position.x, transform.position.y);
+        Vector3 posSpam = new Vector3(this.transform.position.x - 3.6f, transform.position.y);
         for (int i = 0; i < 8; i++)
         {
             posSpam.x += 1.2f;
-            if (posSpam.x > 4f)
+            if (posSpam.x > 2.3f)
             {
-                posSpam.x = 0.2f;
+                posSpam.x = -2.4f;
                 posSpam.y = -2.6f;
             }
             positions.Add(posSpam);
